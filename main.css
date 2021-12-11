@@ -1,3 +1,16 @@
+.cabecera{
+    text-align: center;
+    font-family: 'Verdana';
+}
+
+.buscacor{
+    width:100%
+}
+
+.categoria{
+    text-align: center;    
+}
+
 .grid{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -23,7 +36,7 @@
 
 div{
     background: #ecf0f1;
-    padding: 1em;
+    padding: 15px;
 }
 
 .grid > div:hover{
