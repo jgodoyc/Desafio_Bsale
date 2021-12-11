@@ -51,7 +51,7 @@ def ver_producto(id):
                 'discount':datos[4],
                 'category':datos[5]
             }
-            return jsonify({'producto':producto, 'mensaje':"Producto encontrado."})
+            return jsonify({'productos':producto, 'mensaje':"Producto encontrado."})
         else:
             return jsonify({'mensaje':"Producto no encontrado."}) 
     except Exception as ex:
@@ -80,17 +80,21 @@ def listar_categorias():
 def ver_categoria(id):
     try:
         cursor = conexion.connection.cursor()
-        sql="SELECT id, name FROM category WHERE id = '{0}'".format(id)
+        sql="SELECT id, name, url_image, price, discount, category FROM product WHERE category = '{0}'".format(id)
         cursor.execute(sql)
-        datos=cursor.fetchone()
-        if datos != None:
-            categoria = {
-                'id':datos[0],
-                'name':datos[1]                
+        datos = cursor.fetchall()
+        productos = []
+        for fila in datos:
+            producto = {
+                'id':fila[0],
+                'name':fila[1],
+                'url_image':fila[2],
+                'price':fila[3],
+                'discount':fila[4],
+                'category':fila[5]
             }
-            return jsonify({'categoria':categoria, 'mensaje':"Categoria encontrada."})
-        else:
-            return jsonify({'mensaje':"Categoria no encontrada."}) 
+            productos.append(producto)
+        return jsonify({'productos':productos, 'mensaje':"Productos listados."})
     except Exception as ex:
        return jsonify({'mensaje':"Error"}) 
 
