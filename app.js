@@ -52,7 +52,7 @@ const pintarCategorias = (dataC) => {
     const fragmentC = document.createDocumentFragment()
 
     dataC['categorias'].forEach(categoria => {
-        console.log(categoria.name)
+        //console.log(categoria.name)
         templateC.querySelector('span').textContent = categoria.name
         const cloneC = templateC.cloneNode(true)
         fragmentC.appendChild(cloneC)        
@@ -60,6 +60,4 @@ const pintarCategorias = (dataC) => {
     
     
     contenedorCategorias.appendChild(fragmentC)
-}
-
-    
+} 
