@@ -10,7 +10,7 @@ const buscar = document.querySelector('#btnSearch')
 
 const fetchData = async () => {
     try {
-        const res = await fetch('http://127.0.0.1:5000/productos')
+        const res = await fetch('https://tienda-jgodoy.netlify.app/productos')
         const data = await res.json()
         pintarProductos(data)
 
@@ -21,7 +21,7 @@ const fetchData = async () => {
 
 const fetchDataf = async (idCategoria) => {
     try {
-        const res = await fetch('http://127.0.0.1:5000/categorias/' + idCategoria)
+        const res = await fetch('https://tienda-jgodoy.netlify.app/categorias/' + idCategoria)
         const data = await res.json()
         pintarProductos(data)
 
@@ -50,7 +50,7 @@ const pintarProductos = (data) => {
 
 const fetchDataC = async () => {
     try {
-        const resC = await fetch('http://127.0.0.1:5000/categorias')
+        const resC = await fetch('https://tienda-jgodoy.netlify.app/categorias')
         const dataC = await resC.json()
         pintarCategorias(dataC)
 
@@ -86,9 +86,9 @@ buscar.addEventListener('click', async () => {
     const texto = document.getElementById('search').value
     try {              
         if (texto !== "") {
-            var resB = await fetch('http://127.0.0.1:5000/productos/buscar/' + texto) 
+            var resB = await fetch('https://tienda-jgodoy.netlify.app/productos/buscar/' + texto) 
         }else{
-            var resB = await fetch('http://127.0.0.1:5000/productos')  
+            var resB = await fetch('https://tienda-jgodoy.netlify.app/productos')  
         }
         var dataB = await resB.json() 
         if (dataB['productos'].length > 0) {
