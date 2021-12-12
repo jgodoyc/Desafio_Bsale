@@ -12,7 +12,7 @@ const buscar = document.querySelector('#btnSearch')
 //Obtener informacion de producotos
 const fetchData = async () => {
     try {
-        const res = await fetch(dom+'/productos')
+        const res = await fetch(dom + '/productos')
         const data = await res.json()
         pintarProductos(data)
 
@@ -38,15 +38,15 @@ const pintarProductos = (data) => {
     contenedorProductos.innerHTML = ""
     const template = document.querySelector('#template-productos').content
     const fragment = document.createDocumentFragment()
-    
-    data['productos'].forEach(producto => {  
-        if(producto.url_image === null){            
+
+    data['productos'].forEach(producto => {
+        if (producto.url_image === null) {
             var url = 'https://www.bicifan.uy/wp-content/uploads/2016/09/producto-sin-imagen.png'
-        }else{
+        } else {
             var url = producto.url_image
-        }           
-        
-        template.querySelector('img').setAttribute('src', url );                  
+        }
+
+        template.querySelector('img').setAttribute('src', url);
         template.querySelector('h5').textContent = producto.name
         template.querySelector('p span').textContent = producto.price
 
@@ -59,7 +59,7 @@ const pintarProductos = (data) => {
 //Obtener informacion de las categorias
 const fetchDataC = async () => {
     try {
-        const resC = await fetch(dom+'/categorias')
+        const resC = await fetch(dom + '/categorias')
         const dataC = await resC.json()
         pintarCategorias(dataC)
 
@@ -80,14 +80,12 @@ const pintarCategorias = (dataC) => {
 
         const cloneC = templateC.firstElementChild.cloneNode(true)
         cloneC.addEventListener('click', async (id) => {
-
             const idCategoria = categoria.id
             await fetchDataf(idCategoria);
         })
         fragmentC.appendChild(cloneC)
     });
     contenedorCategorias.appendChild(fragmentC)
-
 }
 
 //Filtrar por categoria
@@ -111,7 +109,3 @@ buscar.addEventListener('click', async () => {
         console.log(error)
     }
 })
-
-//onChange
-// .filter
-//productos.filter((producto ) => producto.name.includes("Cadena a buscar"))
