@@ -107,17 +107,20 @@ def buscar_producto(texto):
         cursor.execute(sql)
         datos = cursor.fetchall()
         productos = []
-        for fila in datos:
-            producto = {
-                'id':fila[0],
-                'name':fila[1],
-                'url_image':fila[2],
-                'price':fila[3],
-                'discount':fila[4],
-                'category':fila[5]
-            }
-            productos.append(producto)
-        return jsonify({'productos':productos, 'mensaje':"Productos listados."})
+        if datos != None:
+            for fila in datos:
+                producto = {
+                    'id':fila[0],
+                    'name':fila[1],
+                    'url_image':fila[2],
+                    'price':fila[3],
+                    'discount':fila[4],
+                    'category':fila[5]
+                }
+                productos.append(producto)
+            return jsonify({'productos':productos, 'mensaje':"Productos listados."})
+        else:
+            return jsonify({'mensaje':"Producto no encontrado."}) 
     except Exception as ex:
        return jsonify({'mensaje':"Error"}) 
 
