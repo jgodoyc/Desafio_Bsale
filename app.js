@@ -35,9 +35,15 @@ const pintarProductos = (data) => {
     contenedorProductos.innerHTML = ""
     const template = document.querySelector('#template-productos').content
     const fragment = document.createDocumentFragment()
-
-    data['productos'].forEach(producto => {
-        template.querySelector('img').setAttribute('src', producto.url_image)
+    
+    data['productos'].forEach(producto => {  
+        if(producto.url_image === null){            
+            var url = 'https://www.bicifan.uy/wp-content/uploads/2016/09/producto-sin-imagen.png'
+        }else{
+            var url = producto.url_image
+        }           
+        
+        template.querySelector('img').setAttribute('src', url );                  
         template.querySelector('h5').textContent = producto.name
         template.querySelector('p span').textContent = producto.price
 
@@ -84,13 +90,13 @@ const pintarCategorias = (dataC) => {
 
 buscar.addEventListener('click', async () => {
     const texto = document.getElementById('search').value
-    try {              
+    try {
         if (texto !== "") {
-            var resB = await fetch('http://127.0.0.1:5000/productos/buscar/' + texto) 
-        }else{
-            var resB = await fetch('http://127.0.0.1:5000/productos')  
+            var resB = await fetch('http://127.0.0.1:5000/productos/buscar/' + texto)
+        } else {
+            var resB = await fetch('http://127.0.0.1:5000/productos')
         }
-        var dataB = await resB.json() 
+        var dataB = await resB.json()
         if (dataB['productos'].length > 0) {
             pintarProductos(dataB)
         } else {
