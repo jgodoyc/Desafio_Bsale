@@ -2,15 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData()
     fetchDataC()
 })
+//Dominio, se recomienda modificar si se cambia de equipo
+const dom = 'http://127.0.0.1:5000'
 
 const contenedorCategorias = document.querySelector('#contenedor-categorias')
 const contenedorProductos = document.querySelector('#contenedor-productos')
-
 const buscar = document.querySelector('#btnSearch')
 
+//Obtener informacion de producotos
 const fetchData = async () => {
     try {
-        const res = await fetch('http://127.0.0.1:5000/productos')
+        const res = await fetch(dom+'/productos')
         const data = await res.json()
         pintarProductos(data)
 
@@ -19,9 +21,10 @@ const fetchData = async () => {
     }
 }
 
+//Obtener informacion filtrada
 const fetchDataf = async (idCategoria) => {
     try {
-        const res = await fetch('http://127.0.0.1:5000/categorias/' + idCategoria)
+        const res = await fetch(dom + '/categorias/' + idCategoria)
         const data = await res.json()
         pintarProductos(data)
 
@@ -30,7 +33,7 @@ const fetchDataf = async (idCategoria) => {
     }
 }
 
-
+//Dibujar en pantalla los productos
 const pintarProductos = (data) => {
     contenedorProductos.innerHTML = ""
     const template = document.querySelector('#template-productos').content
@@ -53,10 +56,10 @@ const pintarProductos = (data) => {
     contenedorProductos.appendChild(fragment)
 }
 
-
+//Obtener informacion de las categorias
 const fetchDataC = async () => {
     try {
-        const resC = await fetch('http://127.0.0.1:5000/categorias')
+        const resC = await fetch(dom+'/categorias')
         const dataC = await resC.json()
         pintarCategorias(dataC)
 
@@ -65,8 +68,7 @@ const fetchDataC = async () => {
     }
 }
 
-
-
+//Dibujar botones de categorias
 const pintarCategorias = (dataC) => {
     const templateC = document.querySelector('#template-categorias').content
     const fragmentC = document.createDocumentFragment()
@@ -88,13 +90,14 @@ const pintarCategorias = (dataC) => {
 
 }
 
+//Filtrar por categoria
 buscar.addEventListener('click', async () => {
     const texto = document.getElementById('search').value
     try {
         if (texto !== "") {
-            var resB = await fetch('http://127.0.0.1:5000/productos/buscar/' + texto)
+            var resB = await fetch(dom + '/productos/buscar/' + texto)
         } else {
-            var resB = await fetch('http://127.0.0.1:5000/productos')
+            var resB = await fetch(dom + '/productos')
         }
         var dataB = await resB.json()
         if (dataB['productos'].length > 0) {

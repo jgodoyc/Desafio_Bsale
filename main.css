@@ -1,44 +1,4 @@
-.cabecera{
-    text-align: center;
-    font-family: 'Verdana';
-}
-
-.buscacor{
-    width:100%
-}
-
-.categoria{
-    text-align: center;    
-}
-
-.grid{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    grid-auto-columns: minmax(200px, auto);
-    grid-auto-rows: minmax(400px, auto);
-    justify-items: center;
-}
-
-.nested-grid{
-    display: grid;
-    grid-template-rows: 80% 10% 10%;
-    justify-items: center;
-}
-
-.titulo{
-    font-family: Verdana;
-}
-
-.valor{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
 div{
     background: #ecf0f1;
     padding: 15px;
-}
-
-.grid > div:hover{
-    border: 1px solid #f1c40f;
 }
