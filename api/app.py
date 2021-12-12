@@ -98,6 +98,29 @@ def ver_categoria(id):
     except Exception as ex:
        return jsonify({'mensaje':"Error"}) 
 
+
+@app.route('/productos/buscar/<texto>', methods=['GET'])
+def buscar_producto(texto):
+    try:
+        cursor = conexion.connection.cursor()
+        sql="SELECT id, name, url_image, price, discount, category FROM product WHERE name LIKE '%{0}%'".format(texto)
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        productos = []
+        for fila in datos:
+            producto = {
+                'id':fila[0],
+                'name':fila[1],
+                'url_image':fila[2],
+                'price':fila[3],
+                'discount':fila[4],
+                'category':fila[5]
+            }
+            productos.append(producto)
+        return jsonify({'productos':productos, 'mensaje':"Productos listados."})
+    except Exception as ex:
+       return jsonify({'mensaje':"Error"}) 
+
 def pag_not_found(error):
     return "<h1>La pagina que intentas acceder no existe...</h1>", 404
 

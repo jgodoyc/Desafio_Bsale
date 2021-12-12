@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const contenedorCategorias = document.querySelector('#contenedor-categorias')
 const contenedorProductos = document.querySelector('#contenedor-productos')
-const buscador = document.querySelector('search')
-const productos = []
+
+const buscar = document.querySelector('#btnSearch')
 
 const fetchData = async () => {
     try {
@@ -34,7 +34,7 @@ const fetchDataf = async (idCategoria) => {
 const pintarProductos = (data) => {       
     contenedorProductos.innerHTML = ""
     const template = document.querySelector('#template-productos').content
-    const fragment = document.createDocumentFragment()
+    const fragment = document.createDocumentFragment()    
 
     data['productos'].forEach(producto => { 
         template.querySelector('img').setAttribute('src', producto.url_image)
@@ -82,7 +82,17 @@ const pintarCategorias = (dataC) => {
       
 }
 
+buscar.addEventListener('click', async() =>{
+    const texto = document.getElementById('search').value
+    try {
+        const resB = await fetch('http://127.0.0.1:5000/productos/buscar/'+texto)
+        const dataB = await resB.json()
+        pintarProductos(dataB)
 
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 //onChange
 // .filter
