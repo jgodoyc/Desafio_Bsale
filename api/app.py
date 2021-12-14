@@ -5,7 +5,7 @@ from config import config
 import os
 
 app = Flask(__name__)
-#CORS(app)
+CORS(app)
 
 conexion = MySQL(app)
 

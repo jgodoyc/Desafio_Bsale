@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchDataC()
 })
 //Dominio, se recomienda modificar si se cambia de equipo
-const dom = 'http://sheltered-brook-15546.herokuapp.com'
+const dom = 'https://sheltered-brook-15546.herokuapp.com'
 
 const contenedorCategorias = document.querySelector('#contenedor-categorias')
 const contenedorProductos = document.querySelector('#contenedor-productos')
