@@ -2,13 +2,23 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_mysqldb import MySQL
 from config import config
+import os
 
 app = Flask(__name__)
-CORS(app)
 
 conexion = MySQL(app)
 
-@app.route('/wan')
+def pag_not_found(error):
+    return "<h1>La pagina que intentas acceder no existe...</h1>", 404
+
+if __name__ == '__main__':
+    app.config.from_object(config['development'])
+    app.register_error_handler(404,pag_not_found)
+    PORT = int(os.environ.get("PORT", 5000))
+    app.run(port = PORT, host='0.0.0.0', debug = 'DEBUG')
+
+
+@app.route('/')
 def index():
     return "Wan"
 
@@ -124,11 +134,4 @@ def buscar_producto(texto):
     except Exception as ex:
        return jsonify({'mensaje':"Error"}) 
 
-def pag_not_found(error):
-    return "<h1>La pagina que intentas acceder no existe...</h1>", 404
-
-if __name__ == '__main__':
-    app.config.from_object(config['development'])
-    app.register_error_handler(404,pag_not_found)
-    app.run()
 
